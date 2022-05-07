@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1 id="total">Mens page</h1>
+    <div id="container">
+
+    </div>
+</body>
+</html>
+
+
+
+<script>
+    var getitem=JSON.parse(localStorage.getItem("add_to_cart"));
+    
+    
+    displaycard(getitem);
+
+function displaycard(data){
+    
+    data.map(function(elem){
+        var box=document.createElement("div");
+      var image=document.createElement("img");
+      var name=document.createElement("h4");
+      var price=document.createElement("h5");
+      var sprice=document.createElement("h5");
+      var btn=document.createElement("button");
+
+      image.src=elem.image_url;
+
+      image.src=elem.image_url;
+      name.innerText=elem.name;
+      price.innerText=elem.price;
+      sprice.innerText=elem.strikedoffprice;
+      btn.innerText="Add to Cart"
+
+
+
+      box.append(image,name,price,sprice,btn);
+      document.querySelector("#container").append(box);
+    })
+    
+    
+   
+    
+}
+
+function add(getitem){
+    var total =getitem.reduce(function(acc,ele){
+        return acc+ele.price;
+    },0)
+    return total;
+}
+document.querySelector("#total").innerText="Total Price:"+" "+add(getitem);
+
+console.log(add(getitem));
+</script>
